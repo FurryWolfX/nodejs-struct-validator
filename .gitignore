@@ -1,0 +1,8 @@
+# IntelliJ project files
+.idea
+*.iml
+
+# temp
+dist
+node_modules
+yarn.lock
