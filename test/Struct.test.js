@@ -4,6 +4,7 @@ const userStruct = new Struct({
   name: {
     require: true,
     msg: "用户名称为必填，且长度必须是2-3",
+    type: "string",
     maxLength: 3,
     minLength: 2
   },
@@ -17,7 +18,7 @@ const userStruct = new Struct({
   sex: {
     msg: "必须是男",
     validator: function(v) {
-      return v === "男";  // 返回 true 则表示校验通过
+      return v === "男"; // 返回 true 则表示校验通过
     }
   },
   tags: {
@@ -33,7 +34,7 @@ const tagStruct = new Struct({
 });
 
 const user = {
-  name: "A",
+  name: "AA",
   sex: "男",
   age: 10,
   isStudent: "",
