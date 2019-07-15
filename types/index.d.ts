@@ -1,5 +1,5 @@
 export default interface Struct {
-  validate(): {
+  validate(obj: any): {
     valid: boolean;
     typeError: string;
     msg: string;

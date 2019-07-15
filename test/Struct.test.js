@@ -9,7 +9,10 @@ const userStruct = new Struct({
   },
   age: {
     msg: "age必须是数字",
-    type: "number" // 'object' | 'number' | 'array' | 'string'
+    type: "number" // 'object' | 'number' | 'array' | 'string' | 'boolean'
+  },
+  isStudent: {
+    type: "boolean"
   },
   sex: {
     msg: "必须是男",
@@ -19,7 +22,7 @@ const userStruct = new Struct({
   },
   tags: {
     msg: "tags必须是数组",
-    type: "array" // 'object' | 'number' | 'array' | 'string'
+    type: "array" // 'object' | 'number' | 'array' | 'string' | 'boolean'
   }
 });
 
@@ -33,6 +36,7 @@ const user = {
   name: "A",
   sex: "男",
   age: 10,
+  isStudent: "",
   tags: [
     {
       tagName: "AAA"

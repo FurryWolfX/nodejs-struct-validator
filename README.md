@@ -6,7 +6,6 @@ npm i @wolfx/struct --save
 
 ```javascript
 const Struct = require("@wolfx/struct");
-
 const userStruct = new Struct({
   name: {
     require: true,
@@ -16,17 +15,20 @@ const userStruct = new Struct({
   },
   age: {
     msg: "age必须是数字",
-    type: "number" // 'object' | 'number' | 'array' | 'string'
+    type: "number" // 'object' | 'number' | 'array' | 'string' | 'boolean'
+  },
+  isStudent: {
+    type: "boolean"
   },
   sex: {
     msg: "必须是男",
     validator: function(v) {
-      return v === "男"; // 返回 true 则表示校验通过
+      return v === "男";  // 返回 true 则表示校验通过
     }
   },
   tags: {
     msg: "tags必须是数组",
-    type: "array" // 'object' | 'number' | 'array' | 'string'
+    type: "array" // 'object' | 'number' | 'array' | 'string' | 'boolean'
   }
 });
 
@@ -40,6 +42,7 @@ const user = {
   name: "A",
   sex: "男",
   age: 10,
+  isStudent: "",
   tags: [
     {
       tagName: "AAA"

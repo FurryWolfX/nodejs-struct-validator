@@ -1,6 +1,6 @@
 {
   "name": "@wolfx/struct",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "struct validator",
   "main": "dist/Struct.umd.js",
   "typings": "types/index.d.ts",
