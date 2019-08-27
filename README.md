@@ -1,15 +1,22 @@
 用于校验格式，主要用于 nodejs 接口校验
 
+# 安装
+
 ```bash
 npm i @wolfx/struct --save
 ```
 
+# 使用
+
 ```javascript
-const Struct = require("@wolfx/struct");
+const Struct = require("@wolfx/struct").default;
+// 或 import Struct from "@wolfx/struct"
+
+// 创建校验规则，以下是针对name,age,isStudent,sex,tags进行校验
 const userStruct = new Struct({
   name: {
     require: true,
-    msg: "用户名称为必填，且长度必须是2-3",
+    msg: "用户名称为必填，且长度必须是2-3", // 如果校验失败会返回这个提示
     type: "string",
     maxLength: 3,
     minLength: 2
@@ -33,12 +40,14 @@ const userStruct = new Struct({
   }
 });
 
+// 对子对象创建校验规则
 const tagStruct = new Struct({
   tagName: {
     type: "string"
   }
 });
 
+// 你的数据对象
 const user = {
   name: "AA",
   sex: "男",

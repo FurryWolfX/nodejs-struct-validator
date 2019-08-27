@@ -1,17 +1,17 @@
+type StructOption = {
+  [key: string]: {
+    require?: boolean;
+    msg?: string;
+    minLength?: number;
+    maxLength?: number;
+    type?: string;
+    validator?: (v: any) => boolean;
+  };
+};
+
 class Struct {
-  /**
-   * @param struct {
-   *   name: {
-   *     require: true,
-   *     msg: String,
-   *     minLength: Number,
-   *     maxLength: Number,
-   *     type: 'object' | 'number' | 'array' | 'string' | 'boolean'
-   *     validator: Function
-   *   }
-   * }
-   */
-  constructor(struct) {
+  struct: StructOption;
+  constructor(struct: StructOption) {
     this.struct = struct;
   }
   isString(v) {
@@ -29,7 +29,7 @@ class Struct {
   isBoolean(v) {
     return typeof v === "boolean";
   }
-  validate(obj) {
+  validate(obj): { valid: boolean; typeError: string; msg: string } {
     for (let key in this.struct) {
       if (this.struct.hasOwnProperty(key)) {
         if (this.struct[key].require === true && !obj[key]) {
@@ -65,11 +65,7 @@ class Struct {
               typeError: "数据类型校验失败，" + key + "必须是字符串",
               msg: this.struct[key].msg
             };
-          } else if (
-            type === "object" &&
-            (this.isObject(obj[key]) === false ||
-              this.isArray(obj[key]) === true)
-          ) {
+          } else if (type === "object" && (this.isObject(obj[key]) === false || this.isArray(obj[key]) === true)) {
             // 类型是对象，且值不是对象
             return {
               valid: false,
@@ -90,10 +86,7 @@ class Struct {
           // 只校验数组和字符串类型的长度
           // 最大长度校验
           if (this.isNumber(this.struct[key].maxLength)) {
-            if (
-              obj[key].length !== undefined &&
-              obj[key].length > this.struct[key].maxLength
-            ) {
+            if (obj[key].length !== undefined && obj[key].length > this.struct[key].maxLength) {
               // 超过最大长度
               return {
                 valid: false,
@@ -104,10 +97,7 @@ class Struct {
           }
           // 最小长度校验
           if (this.isNumber(this.struct[key].minLength)) {
-            if (
-              obj[key].length !== undefined &&
-              obj[key].length < this.struct[key].minLength
-            ) {
+            if (obj[key].length !== undefined && obj[key].length < this.struct[key].minLength) {
               // 小于最小长度
               return {
                 valid: false,
@@ -119,10 +109,7 @@ class Struct {
         }
 
         // 自定义校验
-        if (
-          typeof this.struct[key].validator === "function" &&
-          this.struct[key].validator(obj[key]) === false
-        ) {
+        if (typeof this.struct[key].validator === "function" && this.struct[key].validator(obj[key]) === false) {
           return {
             valid: false,
             typeError: key + "自定义校验失败",
@@ -139,4 +126,4 @@ class Struct {
   }
 }
 
-module.exports = Struct;
+export default Struct;

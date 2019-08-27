@@ -1,4 +1,4 @@
-const Struct = require("../");
+const Struct = require("../").default;
 
 const userStruct = new Struct({
   name: {
